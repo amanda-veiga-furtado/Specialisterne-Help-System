@@ -16,12 +16,7 @@
             <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
         <style>
-        /*containers*/
-        <?php
-            // Função Mudar Imagem Aleatóriamente
-                $images = range(start: 1,end: 32); // Array com o nome das imagens
-                $randomImage = $images[array_rand($images)]; // Seleciona uma imagem aleatória    
-        ?>
+
         .container_background_image_small {
             width: 100vw;
             height: 70.6vh; 
@@ -29,7 +24,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url('../css/img/fundo/<?php echo $randomImage; ?>.jpg')no-repeat center center;
+            background: url('../css/img/fundo/fundo.png')no-repeat center center;
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -40,7 +35,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url('../css/img/fundo/<?php echo $randomImage; ?>.jpg')no-repeat center center;
+            background: url('../css/img/fundo/fundo.png')no-repeat center center;
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -51,7 +46,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url('../css/img/fundo/<?php echo $randomImage; ?>.jpg')no-repeat center center;
+            background: url('../css/img/fundo/fundo.png')no-repeat center center;
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -62,7 +57,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url('../../css/img/fundo/<?php echo $randomImage; ?>.jpg')no-repeat center center;
+            background: url('../../css/img/fundo/fundo.png')no-repeat center center;
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
