@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 04/11/2024 às 17:10
+-- Tempo de geração: 05/11/2024 às 15:19
 -- Versão do servidor: 8.2.0
 -- Versão do PHP: 8.2.13
 
@@ -24,6 +24,37 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `forum_perguntas`
+--
+
+DROP TABLE IF EXISTS `forum_perguntas`;
+CREATE TABLE IF NOT EXISTS `forum_perguntas` (
+  `id_usuario` int NOT NULL,
+  `nome_usuario` varchar(220) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `id_pergunta` int NOT NULL,
+  `pergunta` varchar(500) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id_usuario`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `forum_respostas`
+--
+
+DROP TABLE IF EXISTS `forum_respostas`;
+CREATE TABLE IF NOT EXISTS `forum_respostas` (
+  `id_usuario` int NOT NULL,
+  `nome_usuario` varchar(220) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `id_pergunta` int DEFAULT NULL,
+  `resposta` varchar(500) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `curtidas` int DEFAULT NULL,
+  PRIMARY KEY (`id_usuario`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `usuario`
 --
 
@@ -38,14 +69,15 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `unique_nome_usuario` (`nome_usuario`),
   UNIQUE KEY `unique_email_usuario` (`email_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=168 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=169 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Despejando dados para a tabela `usuario`
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nome_usuario`, `email_usuario`, `senha_usuario`, `imagem_usuario`, `statusAdministrador_usuario`) VALUES
-(1, 'Amanda', 'amandaveigafurtado@gmail.com', '$2y$10$QZEMW75b3179MRkwDPWsJ.FvMeSFvyB2b7KmbBir2y/G/PL9iWbEC', '../css/img/usuario/image.png', 'a');
+(1, 'Amanda', 'amandaveigafurtado@gmail.com', '$2y$10$QZEMW75b3179MRkwDPWsJ.FvMeSFvyB2b7KmbBir2y/G/PL9iWbEC', '../css/img/usuario/image.png', 'a'),
+(168, '1234@gmail.com', '1234@gmail.com', '$2y$10$xy6UtoQLNbxeBA.1zS/zquv3ck3VoXHS6YTF2XVcUMW6sKYxR9fiS', '../css/img/usuario/no_image.png', 'c');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
