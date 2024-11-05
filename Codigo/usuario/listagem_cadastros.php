@@ -3,7 +3,7 @@
     ob_start();
 
     include_once '../conexao.php';
-    include '../css/functions.php';
+    include '../css/css.php';
     include_once '../menu.php';
     include_once '../menu_admin.php';
 
