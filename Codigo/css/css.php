@@ -15,7 +15,61 @@
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-        <style>
+    <style>
+        /* Paleta de Cores______________________________________________________*/
+            :root {
+                --rosa:                 #ff3c5f;        
+                --roxo:                 #9340ff;
+                --vermelho-primario:    #fe797b;        --vermelho-secundario:  #FC445D;
+                --laranja-primario:     #ffb750;        --laranja-secundario:   #f39c12;
+                --amarelo-primario:     #ffea56;        --amarelo-secundario:   #f1c40f;
+                --verde-primario:       #8fe968;        --verde-secundario:     #7BDB47;
+                --azul-primario:        #36cedc;        --azul-secundario:      #30B5C2;
+                --roxo-primario:        #a587ca;        --roxo-secundario:      #8c6db6;
+                --cinza-primario:       #f9f9f9;        --cinza-secundario:     #8f8f8f; 
+            }
+            .container_background_home {
+                width: 100%;
+                min-height: 100%;
+                /* height: 85.3vh; */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: rgb(16, 23, 40);
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+            }
+
+            .button-short{
+                padding: 12px;
+                border: none;
+                border-radius: 100px;
+                background:linear-gradient(90deg, var(--roxo), var(--rosa));
+                color: white;
+                font-size: 18px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                width: 30%;    
+                justify-content: center; /* centraliza os itens horizontalmente */
+                align-items: center; /* centraliza os itens verticalmente */
+                text-align: center;
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         .container_background_image_small {
             width: 100vw;
@@ -24,7 +78,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url('../css/img/fundo/fundo.png')no-repeat center center;
+            /* background: url('../css/img/fundo/fundo.png')no-repeat center center; */
+            background-color: rgb(16, 23, 40);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -35,7 +90,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url('../css/img/fundo/fundo.png')no-repeat center center;
+            /* background: url('../css/img/fundo/fundo.png')no-repeat center center; */
+            background-color: rgb(16, 23, 40);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -46,7 +102,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url('../css/img/fundo/fundo.png')no-repeat center center;
+            /* background: url('../css/img/fundo/fundo.png')no-repeat center center; */
+            background-color: rgb(16, 23, 40);
+
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -213,16 +271,7 @@
             body {
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             }
-            /* Paleta de Cores______________________________________________________*/
-                :root {
-                    --vermelho-primario:    #fe797b;        --vermelho-secundario:  #FC445D;
-                    --laranja-primario:     #ffb750;        --laranja-secundario:   #f39c12;
-                    --amarelo-primario:     #ffea56;        --amarelo-secundario:   #f1c40f;
-                    --verde-primario:       #8fe968;        --verde-secundario:     #7BDB47;
-                    --azul-primario:        #36cedc;        --azul-secundario:      #30B5C2;
-                    --roxo-primario:        #a587ca;        --roxo-secundario:      #8c6db6;
-                    --cinza-primario:       #f9f9f9;        --cinza-secundario:     #8f8f8f; 
-                }
+
             /*menu.php______________________________________________________________*/
                 nav {
                     display: flex; /* Usa flexbox para alinhar conteúdo verticalmente */
@@ -454,23 +503,7 @@
 
             /* Botões__________________________________________________________________*/
 
-            .button-yellow {
-                background-color: var(--amarelo-primario);              
-                padding: 12px;
-                border: none;
-                border-radius: 8px;
-                color: white;
-                font-size: 18px;
-                cursor: pointer;
-                transition: background-color 0.3s;
-                width: 100%; 
-                justify-content: center; /* Centraliza horizontalmente */
-                align-items: center; /* Centraliza verticalmente */
-                text-align: center;
-            }
-            .button-yellow:hover {
-                background-color: var(--amarelo-secundario);
-            }
+
             .button-red {
                 /* padding: 12px; */
                 border: none;
@@ -510,20 +543,23 @@
                     color: black;
                     text-align: center;
                 }
-                .button-long {
-                    background-color: var(--roxo-primario);
-                    color: white;
-                    border: none;
-                    border-radius: 8px;
-                    padding: 12px;
-                    font-size: 18px;
-                    cursor: pointer;
-                    transition: background-color 0.3s;
-                    width: 100%;
-                    justify-content: center;
-                    align-items: center; 
-                    text-align: center;
-                }
+                .button-long{
+                padding: 12px;
+                border: none;
+                border-radius: 100px;
+                background:linear-gradient(90deg, var(--roxo), var(--rosa));
+                color: white;
+                font-size: 18px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                /* width: 80%;     */
+                width: 100%;    
+
+                justify-content: center; /* centraliza os itens horizontalmente */
+                align-items: center; /* centraliza os itens verticalmente */
+                text-align: center;
+                /* margin: 10%; */
+            }
                 .button-long:hover, .button-short:hover {
                     background-color: #8c6db6; 
                 }
@@ -777,21 +813,7 @@
 
 
 
-            .button-short{
-                padding: 12px;
-                border: none;
-                border-radius: 8px;
-                background-color: #a587ca;
-                color: white;
-                font-size: 18px;
-                cursor: pointer;
-                transition: background-color 0.3s;
-                /* width: 34%;     */
-                width: 100px;
-                justify-content: center; /* centraliza os itens horizontalmente */
-                align-items: center; /* centraliza os itens verticalmente */
-                text-align: center;
-            }
+
 
 
      
