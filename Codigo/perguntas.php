@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 ob_start();
 
@@ -8,9 +8,12 @@ include_once 'menu.php';
 
 // Verificar se o usuário está logado
 if (!isset($_SESSION['id_usuario'])) {
-    echo "Você precisa estar logado para visualizar e responder perguntas.";
+    echo "<div class='message error'>Você precisa estar logado para visualizar e responder perguntas.</div>";
     exit;
 }
+
+// Variável para mensagens de feedback
+$feedback_message = "";
 
 // Verificar se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -22,23 +25,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Verificar se os campos não estão vazios
     if (empty($area) || empty($duvida_area) || empty($pergunta)) {
-        echo "Todos os campos devem ser preenchidos.";
+        $feedback_message = "Todos os campos devem ser preenchidos.";
     } else {
-        // Preparar a consulta SQL para inserir os dados na tabela
-        $sql = "INSERT INTO forum_perguntas (fk_id_usuario, area, duvida_area, pergunta) VALUES (:id_usuario, :area, :duvida_area, :pergunta)";
-        $stmt = $conn->prepare($sql);
+        try {
+            // Preparar a consulta SQL para inserir os dados na tabela
+            $sql = "INSERT INTO forum_perguntas (fk_id_usuario, area, duvida_area, pergunta) VALUES (:id_usuario, :area, :duvida_area, :pergunta)";
+            $stmt = $conn->prepare($sql);
 
-        // Bind dos parâmetros
-        $stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
-        $stmt->bindParam(':area', $area, PDO::PARAM_INT);
-        $stmt->bindParam(':duvida_area', $duvida_area, PDO::PARAM_INT);
-        $stmt->bindParam(':pergunta', $pergunta, PDO::PARAM_STR);
+            // Bind dos parâmetros
+            $stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
+            $stmt->bindParam(':area', $area, PDO::PARAM_INT);
+            $stmt->bindParam(':duvida_area', $duvida_area, PDO::PARAM_INT);
+            $stmt->bindParam(':pergunta', $pergunta, PDO::PARAM_STR);
 
-        // Executar a consulta e verificar se foi bem-sucedida
-        if ($stmt->execute()) {
-            echo "Pergunta salva com sucesso!";
-        } else {
-            echo "Erro ao salvar a pergunta.";
+            // Executar a consulta e verificar se foi bem-sucedida
+            if ($stmt->execute()) {
+                $feedback_message = "Pergunta salva com sucesso!";
+            } else {
+                $feedback_message = "Erro ao salvar a pergunta.";
+            }
+        } catch (PDOException $e) {
+            $feedback_message = "Erro ao salvar a pergunta: " . $e->getMessage();
         }
     }
 }
@@ -112,19 +119,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: #fff;
             font-size: 16px;
         }
+        .message {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .error {
+            background-color: #e6006b;
+        }
+        .success {
+            background-color: #4CAF50;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Escreva sua dúvida no campo abaixo:</h2>
         
+        <?php if (!empty($feedback_message)): ?>
+            <div class="message <?php echo (strpos($feedback_message, 'sucesso') !== false) ? 'success' : 'error'; ?>">
+                <?php echo $feedback_message; ?>
+            </div>
+        <?php endif; ?>
+
         <form action="" method="POST">
             <div class="question">
                 <label for="area">Eu atuo na área:</label><br>
                 <select name="area" id="area" required>
                     <option value="1">Área 1</option>
                     <option value="2">Área 2</option>
-                    <!-- Adicione mais opções conforme necessário -->
+                    <option value="3">Área 3</option>
+                    <option value="4">Área 4</option>
+                    <option value="5">Área 5</option>
                 </select>
             </div>
 
@@ -133,7 +159,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <select name="duvida_area" id="duvida_area" required>
                     <option value="1">Área 1</option>
                     <option value="2">Área 2</option>
-                    <!-- Adicione mais opções conforme necessário -->
+                    <option value="3">Área 3</option>
+                    <option value="4">Área 4</option>
+                    <option value="5">Área 5</option>
                 </select>
             </div>
 

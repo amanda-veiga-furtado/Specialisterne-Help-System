@@ -72,13 +72,9 @@ include_once 'menu.php';
         <h2>FAQ</h2>
         <div class="subtitle">Perguntas frequentes:</div>
         
-        <div class="faq-box">
-            <p>"Aqui contem as perguntas e respostas mais frequentes"</p>
-        </div>
+        <div class="faq-box"><p>"Aqui contem as perguntas e respostas mais frequentes"</p></div>
         
-        <!-- <button onclick="history.back()" class="button">Voltar</button> -->
         <a href="dashboard.php" class="button">Voltar</a>
-
     </div>
 </body>
 </html>

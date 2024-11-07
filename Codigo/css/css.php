@@ -35,7 +35,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background-color: rgb(16, 23, 40);
+                background-color: #1A1A2E;
                 background-size: cover;
                 background-position: center;
                 background-attachment: fixed;
@@ -79,7 +79,7 @@
             justify-content: center;
             align-items: center;
             /* background: url('../css/img/fundo/fundo.png')no-repeat center center; */
-            background-color: rgb(16, 23, 40);
+            background-color: #1A1A2E;
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -91,7 +91,7 @@
             justify-content: center;
             align-items: center;
             /* background: url('../css/img/fundo/fundo.png')no-repeat center center; */
-            background-color: rgb(16, 23, 40);
+            background-color: #1A1A2E;
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -103,7 +103,7 @@
             justify-content: center;
             align-items: center;
             /* background: url('../css/img/fundo/fundo.png')no-repeat center center; */
-            background-color: rgb(16, 23, 40);
+            background-color: #1A1A2E;
 
             background-size: cover;
             background-position: center;
@@ -202,7 +202,7 @@
             left: 100%;
             width: 100%;
             height: 3px;
-            background: linear-gradient(90deg, var(--vermelho-primario), var(--laranja-primario), var(--amarelo-primario), var(--verde-primario), var(--azul-primario), var(--roxo-primario)); /* Gradiente arco-íris */
+            background:linear-gradient(90deg, var(--roxo), var(--rosa));
             transition: transform 0.3s;
             transform: translateX(-100%); /* Centraliza horizontalmente */
         }
@@ -212,7 +212,7 @@
             left: 0;
             width: 50%;
             height: 3px;
-            background: linear-gradient(90deg, var(--vermelho-primario), var(--laranja-primario), var(--amarelo-primario), var(--verde-primario), var(--azul-primario), var(--roxo-primario)); /* Gradiente arco-íris */
+            background:linear-gradient(90deg, var(--roxo), var(--rosa));
             transition: transform 0.3s;
             }
 
@@ -311,7 +311,7 @@
                     width: 100%; /* Largura total */
                     height: 3px; /* Altura do traço arco-íris */
                     bottom: -6px; /* Posicionamento abaixo do texto */
-                    background: linear-gradient(90deg, var(--vermelho-primario), var(--laranja-primario), var(--amarelo-primario), var(--verde-primario), var(--azul-primario), var(--roxo-primario)); /* Gradiente arco-íris */
+                    background:linear-gradient(90deg, var(--roxo), var(--rosa));
                     visibility: hidden; /* Inicia invisível */
                     transform: scaleX(0); /* Inicia sem largura (escala zero) */
                     transition: transform 0.3s ease, visibility 0s linear 0.3s; /* Transição suave */
@@ -682,7 +682,7 @@
                 height: 3px;
                 margin: 10px 0;
                 border-radius: 5px;
-                background: linear-gradient(90deg, var(--vermelho-primario), var(--laranja-primario), var(--amarelo-primario), var(--verde-primario), var(--azul-primario), var(--roxo-primario)); /* Gradiente arco-íris */
+                background:linear-gradient(90deg, var(--roxo), var(--rosa));
                 transition: transform 0.3s;
             }
         /* Botões___________________________________________________________________________________ */

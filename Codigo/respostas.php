@@ -1,6 +1,10 @@
 <?php
 session_start();
-include_once 'conexao.php';
+ob_start();
+
+include_once 'conexao.php'; 
+include 'css/css.php';
+include_once 'menu.php'; 
 
 // Verificar se o usuário está logado
 if (!isset($_SESSION['id_usuario'])) {
@@ -10,20 +14,20 @@ if (!isset($_SESSION['id_usuario'])) {
 
 // Verificar se o formulário de resposta foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resposta'])) {
-    // $id_usuario = $_SESSION['id_usuario'];
+    $id_usuario = $_SESSION['id_usuario'];
     $id_pergunta = $_POST['id_pergunta'];
     $resposta = htmlspecialchars($_POST['resposta']); // Prevenção contra XSS
 
     // Verificar se os campos estão preenchidos
     if (!empty($id_pergunta) && !empty($resposta)) {
         // Preparar a consulta SQL para inserir a resposta
-        // $sql = "INSERT INTO forum_respostas (fk_id_usuario, fk_id_pergunta, resposta) VALUES (:id_usuario, :id_pergunta, :resposta)";
-        $sql = "INSERT INTO forum_respostas (fk_id_pergunta, resposta) VALUES (:id_pergunta, :resposta)";
+        $sql = "INSERT INTO forum_respostas (fk_id_usuario, fk_id_pergunta, resposta) VALUES (:id_usuario, :id_pergunta, :resposta)";
+        // $sql = "INSERT INTO forum_respostas (fk_id_pergunta, resposta) VALUES (:id_pergunta, :resposta)";
 
         $stmt = $conn->prepare($sql);
 
         // Bind dos parâmetros
-        // $stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
+        $stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
         $stmt->bindParam(':id_pergunta', $id_pergunta, PDO::PARAM_INT);
         $stmt->bindParam(':resposta', $resposta, PDO::PARAM_STR);
 
