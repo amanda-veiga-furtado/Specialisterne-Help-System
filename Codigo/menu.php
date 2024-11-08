@@ -9,7 +9,6 @@
     <nav>
         <ul class="menuItems">
             <li><a href='home.php' data-item='Home'><i class="fa-solid fa-house fa-sm"></i> Home</a></li>
-            <!-- <li><a href='../usuario/login.php' data-item='Login | Cadastro'>Login | Cadastro</a></li> -->
             <li><a href='login_cadastro.php' data-item='Login | Cadastro'>Login | Cadastro</a></li>
             <!-- <li><a href='../receita/listagem_receitas.php' data-item='Pesquisar Receita por Ingrediente'>Pesquisar por Ingrediente</a></li> -->
 

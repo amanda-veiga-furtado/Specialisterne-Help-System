@@ -1,30 +1,136 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/9572f9bae9.js" crossorigin="anonymous"></script>
+    <script src="../css/script_defer.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<style>
+    /*menu.php______________________________________________________________*/
+    nav {
+    display: flex; /* Usa flexbox para alinhar conteúdo verticalmente */
+    flex-direction: column; /* Coluna principal */
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    position: relative; /* Define a posição relativa para o body */
+    font-family: Hack, monospace; /* Define a fonte para todo o documento */
+    width: 100%; /* Faz a navbar preencher toda a largura da tela */
+    margin: 0px; /* Margem zero para remover espaçamento padrão */
+    background: var(--cinza-primario); /* Cor de fundo da barra de navegação */
+    padding: 0px; /* Padding zero para remover espaçamento interno */
+    }
+    .menuItems {
+        list-style: none; /* Remove marcadores de lista */
+        display: flex; /* Usa flexbox para alinhar itens da lista */
+        justify-content: center; /* Centraliza horizontalmente os itens da lista */
+    }
+    .menuItems li {
+        display: flex; /* Adiciona flexbox ao li */
+        align-items: center; /* Centraliza verticalmente os itens */
+        margin: 30px; /* Margem entre os itens da lista */
+        position: relative; /* Define a posição relativa para os itens da lista */
+        text-align: center;
+    }
+    .menuItems a {
+        text-decoration: none; /* Remove sublinhado dos links */
+        color: var(--cinza-secundario); /* Cor do texto dos links */
+        font-size: 24px; /* Tamanho da fonte dos links */
+        font-weight: 400; /* Peso normal da fonte */
+        text-transform: uppercase; /* Transforma o texto em maiúsculas */
+        position: relative; /* Define a posição relativa para os links */
+    }
+    .menuItems a::before {
+        content: ''; /* Conteúdo vazio para o pseudoelemento ::before */
+        position: absolute; /* Posição absoluta para o pseudoelemento */
+        width: 100%; /* Largura total */
+        height: 3px; /* Altura do traço arco-íris */
+        bottom: -6px; /* Posicionamento abaixo do texto */
+        background:linear-gradient(90deg, var(--roxo), var(--rosa));
+        visibility: hidden; /* Inicia invisível */
+        transform: scaleX(0); /* Inicia sem largura (escala zero) */
+        transition: transform 0.3s ease, visibility 0s linear 0.3s; /* Transição suave */
+    }
+    .menuItems a:hover::before {
+        visibility: visible; /* Torna o traço visível ao passar o mouse */
+        transform: scaleX(1); /* Expande o traço para a largura total do link */
+        transition: transform 0.3s ease, visibility 0s linear; /* Transição suave */
+    }
+    body {
+        background-color: #1a1a2e;
+        font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif, Arial;
+        color: #fff;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        margin-top: 50px;
+    }
+    h1 {
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+    h2 {
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+    .subtitle {
+        background-color: #2a2a3e;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 15px;
+        font-size: 18px;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+    .faq-box {
+        background-color: #2b2b4e;
+        padding: 40px;
+        margin: 0 auto;
+        width: 70%;
+        border-radius: 20px;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #fff;
+    }
+    .button {
+        background-color: #ff007f;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+        text-decoration: none;
 
-        <!-- Símbolos -->
-            <script src="https://kit.fontawesome.com/9572f9bae9.js" crossorigin="anonymous"></script>
+    }
+    .button:hover {
+        background-color: #e6006b;
+    }
+    .a{
+        text-decoration: none;
+    }
 
-        <!-- Impedir Digitaçao de caracteres especiais -->
-            <script src="../css/script_defer.js" defer></script>
-        
-        <!-- Campo Select Pesquisar Digitando -->
-            <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-    <style>
+
+
+
+
+
+
         /* Paleta de Cores______________________________________________________*/
             :root {
-                --rosa:                 #ff3c5f;        
+                --rosa:                 #FF007F;        
                 --roxo:                 #9340ff;
                 --vermelho-primario:    #fe797b;        --vermelho-secundario:  #FC445D;
                 --laranja-primario:     #ffb750;        --laranja-secundario:   #f39c12;
                 --amarelo-primario:     #ffea56;        --amarelo-secundario:   #f1c40f;
                 --verde-primario:       #8fe968;        --verde-secundario:     #7BDB47;
-                --azul-primario:        #36cedc;        --azul-secundario:      #30B5C2;
+                        --azul-secundario:      #e6006b;
                 --roxo-primario:        #a587ca;        --roxo-secundario:      #8c6db6;
                 --cinza-primario:       #f9f9f9;        --cinza-secundario:     #8f8f8f; 
             }
@@ -160,7 +266,7 @@
             align-items: center;
             width: 96%;
             height: 93.5%;
-            /* background-color: #30B5C2; */
+            /* background-color: #e6006b; */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin-top: 1.9vh; 
             /* margin-bottom: 1vh; */
@@ -268,59 +374,9 @@
                 margin: 0; /* Remove a margem padrão de todos os elementos */
                 box-sizing: border-box; /* Inclui padding e border na largura e altura total dos elementos */
             }
-            body {
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            }
 
-            /*menu.php______________________________________________________________*/
-                nav {
-                    display: flex; /* Usa flexbox para alinhar conteúdo verticalmente */
-                    flex-direction: column; /* Coluna principal */
-                    justify-content: center; /* Centraliza verticalmente */
-                    align-items: center; /* Centraliza horizontalmente */
-                    position: relative; /* Define a posição relativa para o body */
-                    font-family: Hack, monospace; /* Define a fonte para todo o documento */
-                    width: 100%; /* Faz a navbar preencher toda a largura da tela */
-                    margin: 0px; /* Margem zero para remover espaçamento padrão */
-                    background: var(--cinza-primario); /* Cor de fundo da barra de navegação */
-                    padding: 0px; /* Padding zero para remover espaçamento interno */
-                }
-                .menuItems {
-                    list-style: none; /* Remove marcadores de lista */
-                    display: flex; /* Usa flexbox para alinhar itens da lista */
-                    justify-content: center; /* Centraliza horizontalmente os itens da lista */
-                }
-                .menuItems li {
-                    display: flex; /* Adiciona flexbox ao li */
-                    align-items: center; /* Centraliza verticalmente os itens */
-                    margin: 30px; /* Margem entre os itens da lista */
-                    position: relative; /* Define a posição relativa para os itens da lista */
-                    text-align: center;
-                }
-                .menuItems a {
-                    text-decoration: none; /* Remove sublinhado dos links */
-                    color: var(--cinza-secundario); /* Cor do texto dos links */
-                    font-size: 24px; /* Tamanho da fonte dos links */
-                    font-weight: 400; /* Peso normal da fonte */
-                    text-transform: uppercase; /* Transforma o texto em maiúsculas */
-                    position: relative; /* Define a posição relativa para os links */
-                }
-                .menuItems a::before {
-                    content: ''; /* Conteúdo vazio para o pseudoelemento ::before */
-                    position: absolute; /* Posição absoluta para o pseudoelemento */
-                    width: 100%; /* Largura total */
-                    height: 3px; /* Altura do traço arco-íris */
-                    bottom: -6px; /* Posicionamento abaixo do texto */
-                    background:linear-gradient(90deg, var(--roxo), var(--rosa));
-                    visibility: hidden; /* Inicia invisível */
-                    transform: scaleX(0); /* Inicia sem largura (escala zero) */
-                    transition: transform 0.3s ease, visibility 0s linear 0.3s; /* Transição suave */
-                }
-                .menuItems a:hover::before {
-                    visibility: visible; /* Torna o traço visível ao passar o mouse */
-                    transform: scaleX(1); /* Expande o traço para a largura total do link */
-                    transition: transform 0.3s ease, visibility 0s linear; /* Transição suave */
-                }
+
+  
             /*Input_________________________________________________________________*/
                 .container_form input[type="text"], 
                 .container_form input[type="email"], 
@@ -356,7 +412,7 @@
                 }
                 /* Botão do file input*/
                 input[type="file"]::file-selector-button {
-                    background-color: #36cedc;
+                    background-color: #FF007F;
                     border: none;
                     border-radius: 8px;
                     color: white;
@@ -365,7 +421,7 @@
                     height: 100%; /* Ensures the button fills the input height */
                 }
                 input[type="file"]::file-selector-button:hover {
-                    background-color: #30B5C2;
+                    background-color: #e6006b;
                 }
                 input[type="text"]:focus,
                 .container_form input[type="email"]:focus, 
@@ -690,7 +746,7 @@
                 padding: 12px !important;
                 border: none;
                 border-radius: 8px;
-                background-color: #36cedc;
+                background-color: #FF007F;
                 color: white;
                 font-size: 18px;
                 cursor: pointer;
@@ -702,7 +758,7 @@
                 text-align: center;
             }
             .button-search:hover{
-                background-color: #30B5C2;
+                background-color: #e6006b;
             } 
     
             /* Link______________________________________________________________________________________*/
@@ -887,7 +943,7 @@
                     }
 
                     .pagination a.active {
-                        background-color: #36cedc; /* Azul Primário */
+                        background-color: #FF007F; /* Azul Primário */
                         color: white;
                     }
 
@@ -1078,7 +1134,7 @@
     </head>
     <body>   
         <script>
-            // login.php (css)
+            // login_cadastro.php (css)
                 function showLogin() {
                     document.getElementById('loginForm').style.display = 'block'; // Mostra o formulário de login -->
                     document.getElementById('signupForm').style.display = 'none'; // Esconde o formulário de cadastro 

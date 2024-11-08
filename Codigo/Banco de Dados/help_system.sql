@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 07/11/2024 às 14:08
+-- Tempo de geração: 08/11/2024 às 13:31
 -- Versão do servidor: 8.2.0
 -- Versão do PHP: 8.2.13
 
@@ -36,22 +36,19 @@ CREATE TABLE IF NOT EXISTS `forum_perguntas` (
   `pergunta` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id_pergunta`),
   KEY `fk_id_usuario` (`fk_id_usuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Despejando dados para a tabela `forum_perguntas`
 --
 
 INSERT INTO `forum_perguntas` (`fk_id_usuario`, `id_pergunta`, `area`, `duvida_area`, `pergunta`) VALUES
-(0, 1, '1', '1', 'nnnnnnnn'),
-(0, 2, '1', '2', 'aaaaaaaaaa'),
-(0, 3, '2', '2', '222'),
-(0, 4, '2', '1', 'teste'),
-(1, 5, '1', '1', 'aaaaaaaa'),
-(1, 6, '1', '1', 'gghg'),
-(1, 7, '1', '2', 'jjjjjjjjjjj'),
-(168, 8, '1', '5', '2'),
-(168, 9, '3', '4', 'hhhhhhhhhhh');
+(1, 3, 'TI', 'RH', 'Qual é o processo para solicitar o vale-transporte?'),
+(1, 2, 'TI', 'RH', 'Como faço para utilizar o plano de saúde ou odontológico?'),
+(1, 1, 'TI', 'RH', 'Quais benefícios a empresa oferece?'),
+(1, 4, 'TI', 'RH', 'Como funciona o vale-refeição ou alimentação?'),
+(2, 5, 'Vendas', 'RH', 'A empresa oferece algum auxílio para educação ou cursos?'),
+(2, 6, 'Vendas', 'RH', 'Quando é o pagamento do salário');
 
 -- --------------------------------------------------------
 
@@ -68,17 +65,15 @@ CREATE TABLE IF NOT EXISTS `forum_respostas` (
   `curtidas` int DEFAULT NULL,
   PRIMARY KEY (`id_resposta`),
   KEY `id_usuario` (`fk_id_usuario`,`fk_id_pergunta`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Despejando dados para a tabela `forum_respostas`
 --
 
 INSERT INTO `forum_respostas` (`fk_id_usuario`, `fk_id_pergunta`, `id_resposta`, `resposta`, `curtidas`) VALUES
-(0, 2, 1, 'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', NULL),
-(0, 1, 2, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', NULL),
-(0, 1, 3, 'aaaaaaaaaa', NULL),
-(170, 1, 4, 'hgg', NULL);
+(2, 1, 1, 'A empresa oferece uma variedade de benefícios para apoiar o bem-estar e o desenvolvimento dos colaboradores. Nossos principais benefícios incluem:\r\n\r\nPlano de Saúde e Odontológico: Cobrimos consultas, exames, e alguns procedimentos básicos e de emergência, com extensões para dependentes.\r\nVale-Refeição ou Vale-Alimentação: Com valor mensal que pode ser utilizado em mercados, padarias e restaurantes credenciados.\r\nVale-Transporte: Subsidiado para quem precisa de auxílio com deslocamento.\r\nSeguro ', NULL),
+(2, 2, 2, 'Para utilizar o plano de saúde, basta entrar em contato com uma das clínicas ou laboratórios credenciados e apresentar sua carteirinha do plano de saúde, que foi emitida no momento da contratação. Caso ainda não tenha a carteirinha, você pode solicitar uma segunda via diretamente conosco no RH ou acessá-la pelo aplicativo do plano, onde também é possível visualizar todas as opções de atendimento e especialidades.\r\n\r\nPara o plano odontológico, o processo é semelhante: basta procurar um profission', NULL);
 
 -- --------------------------------------------------------
 
@@ -97,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `unique_nome_usuario` (`nome_usuario`),
   UNIQUE KEY `unique_email_usuario` (`email_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Despejando dados para a tabela `usuario`
@@ -105,9 +100,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 
 INSERT INTO `usuario` (`id_usuario`, `nome_usuario`, `email_usuario`, `senha_usuario`, `imagem_usuario`, `statusAdministrador_usuario`) VALUES
 (1, 'Amanda', 'amandaveigafurtado@gmail.com', '$2y$10$QZEMW75b3179MRkwDPWsJ.FvMeSFvyB2b7KmbBir2y/G/PL9iWbEC', 'css/img/usuario/image.png', 'a'),
-(168, '1234@gmail.com', '1234@gmail.com', '$2y$10$xy6UtoQLNbxeBA.1zS/zquv3ck3VoXHS6YTF2XVcUMW6sKYxR9fiS', 'css/img/usuario/no_image.png', 'c'),
-(169, '12345@gmail.com', '12345@gmail.com', '$2y$10$oe/lPJOt/W2.EV4zToQlq.CKku9uUZ5XbkEY86ldsU3EQ1rbHg1ji', 'css/img/usuario/no_image.png', 'c'),
-(170, '1uuu@gmail.com', '1uuu@gmail.com', '$2y$10$dLngHDCuaZgkrf.AqxKWQOHdLxMuJwf58CAnkhAj6Ds8knRhimgcW', 'css/img/usuario/no_image.png', 'c');
+(2, 'Usuario', '1234@gmail.com', '$2y$10$xy6UtoQLNbxeBA.1zS/zquv3ck3VoXHS6YTF2XVcUMW6sKYxR9fiS', 'css/img/usuario/no_image.png', 'c');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

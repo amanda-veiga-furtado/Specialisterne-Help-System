@@ -14,7 +14,7 @@ if (!isset($_SESSION['id_usuario'])) {
 $id_usuario = $_SESSION['id_usuario'];
 
 if (isset($_SESSION['statusAdministrador_usuario']) && $_SESSION['statusAdministrador_usuario'] === 'a') {
-    include_once 'menu_admin.php'; 
+    // include_once 'menu_admin.php'; 
 }
 
 $nome_usuario = $_SESSION['nome_usuario'];
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_profile'])) {
             } elseif ($imagem_tamanho > $limite_tamanho) {
                 $mensagem = "Erro: O arquivo é muito grande. O tamanho máximo permitido é de 2MB.";
             } else {
-                $target_dir = "../css/img/usuario/";
+                $target_dir = "css/img/usuario/";
                 $target_file = $target_dir . uniqid() . "_" . basename($imagem_usuario);
 
                 if (move_uploaded_file($_FILES['imagem_usuario']['tmp_name'], $target_file)) {
@@ -80,33 +80,50 @@ $imagem_usuario = $stmt->fetchColumn();
     <title>Dashboard</title>
     <meta charset="UTF-8">
     <style>
-        body {
-            background-color: #1a1a2e;
-            font-family: Arial, sans-serif;
-            color: #fff;
-            text-align: center;
+        .container_container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 77vh;
             margin: 0;
-            padding: 0;
+            background-color: #1a1a2e; /* Define um fundo para a página */
         }
         .container {
-            margin-top: 50px;
-        }
-        .bubble {
-            background: #ff007f;
-            color: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 10px;
-            display: inline-block;
-            width: 200px;
-            font-size: 14px;
-        }
-        .question {
-            background: rgba(255, 0, 127, 0.2);
+            background-color: #2B2B4E;
+            padding: 30px;
             border-radius: 15px;
-            padding: 20px;
-            width: 70%;
-            margin: 10px auto;
+            width: 400px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            min-height: 450px; /* Defina uma altura mínima adequada */
+
+        }
+        h2 {
+            margin-top: 0;
+            color: white;
+        }
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            object-fit: cover; /* Garante que a imagem se ajuste sem distorcer */
+            border: 3px solid #ff007f;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ff007f;
+            border-radius: 10px;
+            background-color: #333;
+            color: #fff;
+            font-size: 16px;
+        }
+        /* Estilizando o campo de input de arquivo */
+        input[type="file"] {
+            border: 1px solid #ff007f; /* Borda rosa */
         }
         .button {
             background-color: #ff007f;
@@ -116,89 +133,57 @@ $imagem_usuario = $stmt->fetchColumn();
             border-radius: 10px;
             cursor: pointer;
             font-size: 16px;
-            margin: 10px;
+            margin-top: 20px;
+            width: 100%;
         }
         .button:hover {
             background-color: #e6006b;
         }
-        .input-field {
-            width: 80%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ff007f;
-            border-radius: 10px;
-            background-color: #2a2a3e;
-            color: #fff;
-            font-size: 16px;
-        }
-        select {
-            width: 80%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 10px;
-            border: 1px solid #ff007f;
-            background-color: #2a2a3e;
-            color: #fff;
-            font-size: 16px;
+        .error-message {
+            color: #ff4d4d;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
-<div class="container_background_image_grow">
-    <div class="container_whitecard_grow">
-        <div class="container_form">
-            <div class="form_switch">
-                <h1>Bem-vindo(a) <?php echo htmlspecialchars($nome_usuario); ?>!</h1><br> 
-            </div>
-            <div style="display: flex; align-items: center;">
-                <div style="margin-right: 10px;">
-                    <img src="<?php echo !empty($imagem_usuario) ? htmlspecialchars($imagem_usuario) : 'css/img/usuario/no_image.png'; ?>" alt="Foto de perfil" style="width:150px;height:150px;border-radius: 50%">
-                </div>
-                
-                <div style="margin-top:5px;">
-                    <?php if (!empty($mensagem)): ?>
-                        <p class="error-message"><?php echo htmlspecialchars($mensagem); ?></p>
-                    <?php endif; ?>
-                    
-                    <!-- Form for profile update -->
-                    <form method="POST" enctype="multipart/form-data">
-                        <input type="text" name="nome_usuario" value="<?php echo htmlspecialchars($nome_usuario); ?>" required>
-                        <input type="file" name="imagem_usuario">
-                </div>
-            </div>
-        </div>
-            <!-- <input type="submit" name="update_profile" value="Atualizar Perfil" class="button-long" style="margin-top:25px;"> -->
+<div class="container_container">
 
+    <div class="container">
+        <h2>Editar Perfil</h2>
+        
+        <!-- Foto de Perfil -->
+        <img src="<?php echo htmlspecialchars($imagem_usuario); ?>" alt="Foto de perfil" class="profile-pic">
+        
+        <!-- Exibe mensagem de erro, se houver -->
+        <?php if (!empty($mensagem)): ?>
+            <p class="error-message"><?php echo htmlspecialchars($mensagem); ?></p>
+        <?php endif; ?>
+        
+        <!-- Formulário de Atualização de Perfil -->
+        <form method="POST" enctype="multipart/form-data">
+            <input type="text" name="nome_usuario" class="input-field" value="<?php echo htmlspecialchars($nome_usuario); ?>" required>
+            <input type="file" name="imagem_usuario" class="input-field" accept="image/jpeg">
+            <input type="submit" name="update_profile" value="Atualizar Perfil" class="button">
+        </form>
 
-
-            <!-- <div class="container-button-long"> -->
-                <input type="submit" name="update_profile" value="Atualizar Perfil" class="button-long" style="margin-top:25px;">
-                <a href="dashboard.php" class="button">Voltar</a>
-
-
-            <!-- </div> -->
-
-            
-            </form>
-        </div>
+        <!-- Botão para Voltar ao Dashboard -->
+        <a href="dashboard.php" class="button">Voltar</a>
     </div>
-</div>
+    </div>
 
-<script>
-    <?php if (!empty($mensagem)): ?>
-        alert('<?php echo addslashes($mensagem); ?>');
-    <?php endif; ?>
-
-    // Recarrega a imagem do perfil automaticamente sem recarregar a página inteira
-    document.addEventListener("DOMContentLoaded", function() {
-        const imgElement = document.querySelector("img[alt='Foto de perfil']");
-        if (imgElement) {
-            const src = imgElement.src;
-            imgElement.src = src + "?t=" + new Date().getTime(); // Cache busting
-        }
-    });
-</script>
-
-
+    <script>
+        <?php if (!empty($mensagem)): ?>
+            alert('<?php echo addslashes($mensagem); ?>');
+        <?php endif; ?>
+        
+        // Recarrega a imagem do perfil automaticamente sem recarregar a página inteira
+        document.addEventListener("DOMContentLoaded", function() {
+            const imgElement = document.querySelector("img[alt='Foto de perfil']");
+            if (imgElement) {
+                const src = imgElement.src;
+                imgElement.src = src + "?t=" + new Date().getTime(); // Cache busting
+            }
+        });
+    </script>
 </body>
 </html>

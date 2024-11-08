@@ -5,13 +5,46 @@ ob_start();
 include_once 'conexao.php'; 
 include 'css/css.php';
 include_once 'menu.php'; 
+
+// Verificar se o usuário está logado
+if (!isset($_SESSION['id_usuario'])) {
+    echo "Você precisa estar logado para visualizar suas notificações.";
+    exit;
+}
+
+$id_usuario = $_SESSION['id_usuario'];
+
+// // Consulta para obter as 4 perguntas respondidas pelo usuário logado (usuário atual)
+// $sql = "SELECT p.id_pergunta, p.area, p.duvida_area, p.pergunta, r.resposta 
+//         FROM forum_perguntas AS p
+//         INNER JOIN forum_respostas AS r ON p.id_pergunta = r.fk_id_pergunta
+//         WHERE r.fk_id_usuario = :id_usuario
+//         ORDER BY r.id_resposta DESC
+//         LIMIT 4";
+// $stmt = $conn->prepare($sql);
+// $stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
+// $stmt->execute();
+// $notificacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Consulta para obter as 4 perguntas mais recentes feitas pelo usuário logado e que têm respostas
+$sql = "SELECT p.id_pergunta, p.area, p.duvida_area, p.pergunta, r.resposta
+        FROM forum_perguntas AS p
+        INNER JOIN forum_respostas AS r ON p.id_pergunta = r.fk_id_pergunta
+        WHERE p.fk_id_usuario = :id_usuario
+        ORDER BY r.id_resposta DESC
+        LIMIT 4";
+        
+$stmt = $conn->prepare($sql);
+$stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
+$stmt->execute();
+$notificacoes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ - Perguntas Frequentes</title>
+    <title>Notificações</title>
     <style>
         body {
             background-color: #1a1a2e;
@@ -47,6 +80,14 @@ include_once 'menu.php';
             line-height: 1.5;
             color: #fff;
         }
+        .notificacao {
+            border-bottom: 1px solid #444;
+            padding: 15px 0;
+            text-align: left;
+        }
+        .notificacao:last-child {
+            border-bottom: none;
+        }
         .button {
             background-color: #ff007f;
             color: #fff;
@@ -57,28 +98,35 @@ include_once 'menu.php';
             font-size: 16px;
             margin-top: 20px;
             text-decoration: none;
-
         }
         .button:hover {
             background-color: #e6006b;
         }
-        .a{
+        a {
             text-decoration: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- <h2>FAQ</h2> -->
         <div class="subtitle">Notificações</div>
         
         <div class="faq-box">
-            <p></p>
+            <?php if (!empty($notificacoes)): ?>
+                <?php foreach ($notificacoes as $notificacao): ?>
+                    <div class="notificacao">
+                        <p><strong>Área:</strong> <?= htmlspecialchars($notificacao['area']) ?></p>
+                        <p><strong>Dúvida Área:</strong> <?= htmlspecialchars($notificacao['duvida_area']) ?></p>
+                        <p><strong>Pergunta:</strong> <?= htmlspecialchars($notificacao['pergunta']) ?></p>
+                        <p><strong>Resposta:</strong> <?= htmlspecialchars($notificacao['resposta']) ?></p>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Não há notificações no momento.</p>
+            <?php endif; ?>
         </div>
-        
-        <!-- <button onclick="history.back()" class="button">Voltar</button> -->
-        <a href="dashboard.php" class="button">Voltar</a>
 
+        <a href="dashboard.php" class="button">Voltar</a>
     </div>
 </body>
 </html>

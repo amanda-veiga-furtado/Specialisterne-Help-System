@@ -34,8 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Bind dos parâmetros
             $stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
-            $stmt->bindParam(':area', $area, PDO::PARAM_INT);
-            $stmt->bindParam(':duvida_area', $duvida_area, PDO::PARAM_INT);
+            $stmt->bindParam(':area', $area, PDO::PARAM_STR);
+$stmt->bindParam(':duvida_area', $duvida_area, PDO::PARAM_STR);
+
             $stmt->bindParam(':pergunta', $pergunta, PDO::PARAM_STR);
 
             // Executar a consulta e verificar se foi bem-sucedida
@@ -146,22 +147,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="question">
                 <label for="area">Eu atuo na área:</label><br>
                 <select name="area" id="area" required>
-                    <option value="1">Área 1</option>
-                    <option value="2">Área 2</option>
-                    <option value="3">Área 3</option>
-                    <option value="4">Área 4</option>
-                    <option value="5">Área 5</option>
+                    <option value="TI">TI</option>
+                    <option value="RH">RH</option>
+                    <option value="Administrativo">Administrativo</option>
+                    <option value="Financeiro">Financeiro</option>
+                    <option value="Vendas">Vendas</option>
+                    <option value="Produção">Produção</option>
+                    <option value="Jurídico">Jurídico</option>
+                    <option value="Marketing">Logística</option>
                 </select>
             </div>
 
             <div class="question">
                 <label for="duvida_area">Minha dúvida é em relação à área:</label><br>
                 <select name="duvida_area" id="duvida_area" required>
-                    <option value="1">Área 1</option>
-                    <option value="2">Área 2</option>
-                    <option value="3">Área 3</option>
-                    <option value="4">Área 4</option>
-                    <option value="5">Área 5</option>
+                <option value="TI">TI</option>
+                    <option value="RH">RH</option>
+                    <option value="Administrativo">Administrativo</option>
+                    <option value="Financeiro">Financeiro</option>
+                    <option value="Vendas">Vendas</option>
+                    <option value="Produção">Produção</option>
+                    <option value="Jurídico">Jurídico</option>
+                    <option value="Marketing">Logística</option>
                 </select>
             </div>
 

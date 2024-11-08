@@ -43,10 +43,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['resposta'])) {
 }
 
 // Consulta para obter todas as perguntas
-$sql = "SELECT * FROM forum_perguntas";
+// $sql = "SELECT * FROM forum_perguntas";
+// $stmt = $conn->prepare($sql);
+// $stmt->execute();
+// $perguntas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Consulta para obter todas as perguntas, excluindo as do usuário logado
+$id_usuario = $_SESSION['id_usuario'];
+$sql = "SELECT * FROM forum_perguntas WHERE fk_id_usuario != :id_usuario";
 $stmt = $conn->prepare($sql);
+$stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
 $stmt->execute();
 $perguntas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -113,11 +122,13 @@ $perguntas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <!-- Formulário para responder a pergunta -->
                 <form action="" method="POST">
                     <input type="hidden" name="id_pergunta" value="<?= $pergunta['id_pergunta'] ?>">
-                    <textarea name="resposta" class="input-field" rows="3" placeholder="Escreva sua resposta..." required></textarea>
+                    <textarea name="resposta" class="input-field" rows="3" placeholder="Escreva sua resposta..." required></textarea><br>
                     <button type="submit" class="button">Enviar Resposta</button>
                 </form>
             </div>
         <?php endforeach; ?>
+        <button onclick="history.back()" class="button">Voltar</button>
+
     </div>
 </body>
 </html>
